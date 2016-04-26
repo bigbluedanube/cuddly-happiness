@@ -6,15 +6,15 @@ Use OSC (or something else) to connect board to PD, SC or Max patch.
 Add a fiddle-like object to analyze frequencies, helps execute commands
 Use gameplay code to make LEDs respond to frequencies "heard" by PC/SC/Max.
 
-// dosctring, specs, Standard American English //
+// possible variables for specific frequencies--currently only for violin //
 varA = 1 sul G // high D //
 varB = 4 sul G // 8va //
 varC = 1 sul D // high A //
 varD = 4 sul D // 8va //
 varE = 1 sul A // high E //
 varF = 4 sul A // 8va //
-varG = 1 sul E // 
-varH = 4 sul E
+varG = 1 sul E // 8va high E //
+varH = 4 sul E // 8va //
 
 if varA:
     moveForward 1 space
@@ -24,18 +24,30 @@ if varC:
     moveLeft 1 space
 if varD:
     moveRight 1 space
+if varE:
+    moveForwardLeft 1 space
+if varF:
+    moveForwardRight 1 space
+if varG:
+    moveBackLeft 1 space
+if varH:
+    moveBackRight 1 space
+    
+// how would pieces move multiple spaces? 
+Should it be time-sensitive?
+example: 2000ms = 2 spaces? //
 
 BUGS/LOGISTICAL ISSUES
-1. Can't use only natural harmonics. 
+1.  Can't use only natural harmonics. 
     Creates duplicates. 
     Error message or no, frequencies will trigger execution of multiple commands and might crash the program. 
     If it doesn't crash, use these duplicates for complex pieces like the knight, 
     which moves across horizontal and vertical axes.
 
-2. Individual methods for each piece.
+2.  Individual methods for each piece.
     See methods below.
 
-3. METHODS for capturing pieces
+3.  METHODS for capturing pieces
     creates more problems with duplicate frequencies.
     too many possible combinations
     If [specific checkmate pattern]:
@@ -45,7 +57,7 @@ BUGS/LOGISTICAL ISSUES
     more elifs for a large but finite number of checkmate patterns:
         [trigger large but finite no. of leitmotifs]
 
-4. METHODS for player errors:
+4.  METHODS for player errors:
     a. when a player is in check and makes an impossible move
         [musical equivalent of an error message--BEEP! BEEP!]
     b. when a player attempts to move a piece after putting it down
@@ -54,7 +66,7 @@ BUGS/LOGISTICAL ISSUES
         could be a rude sound--HAHA, LOSER!
         could also be something sad, WOMP, WOMP!
 
-5. Methods for player successes:
+5.  Methods for player successes:
     a. when a player captures their opponent's pieces
         [maybe a bell sound, player associates bell with success]
     b. when a player puts their opponent in check
@@ -64,15 +76,31 @@ BUGS/LOGISTICAL ISSUES
 METHODS CREATED THIS FAR:
   def Pawn
     // method for normal gameplay //
-    // have a method for Start_of_Game //
-    // another method for en passant captures //
-  
+    // method for normal pawn captures //
+    // method for en passant captures //
+    method for Start_of_Game:
+        moveOneSpace
+        moveTwoSpaces
+    def pawnPromotion:
+        method for pawntoRook
+        method for pawntoKnight
+        method for pawntoBishop
+        method for pawntoQueen:
+            call musical-chess.Queen
+            // piece plays as queen from here on out//
+
   def Rook
-    // method for normal gameplay //
-    // method for castling //
+    def minSpaces
+    def maxSpaces
+    def Castle [for exchanging places with the King]
+    
+    // must take into account how many spaces are available, including pieces in the path //
+    // def max = maximum number of spaces Rook can move //
+    // def min = minimum number of spaces Rook can move //
+    // must have TONS of if-statements, given high level of contingency in Rook's movements //
     
   def Knight
-    methods 1: 
+    method 1: 
       moveForward 2 + moveLeft 1
       moveForward 2 + moveRight 1
 
@@ -93,16 +121,17 @@ METHODS CREATED THIS FAR:
       moveForward + moveRight
       moveBack + moveLeft
       moveBack + moveRight
-      // must take into account how many spaces are available, including pieces in the path //
-      // def max = maximum number of spaces Bishop can move //
-      // def min = minimum number of spaces Bishop can move //
-      // must have TONS of if-statements, given high level of contingency in Bishop's movements //
+    // like the Rook, many contingencies restrict the Bishop's movement //
 
   def King
-      // EndGame Methods //
-      // one for King-in-Check --> King-out-of-Check //
+      method for gamePlay (normal, no threats)
+      method for inCheck:
+        if [opponent threatens King's space]: <-- need to figure out how to code this.
+              move into safe(r) space
+              return outofCheck
+        else
+            return ERROR sound. You cannot move there!
       // one or King-in-Check --> endgame method, CHECKMATE //
-      // one for Pawn-to-King //
       // normal gameplay method below //
       moveForward 1 space + moveLeft 1 space
       moveForward 1 space + moveRight 1 space
@@ -110,7 +139,7 @@ METHODS CREATED THIS FAR:
       moveBack 1 space + moveRight 1 space
 
   def Queen
-     move
+      // oh, boy //
 
 THINGS I EXPECT TO INCLUDE IN MY CODE:
 If-Statements.
