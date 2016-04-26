@@ -1,4 +1,4 @@
-Get a chessboard, preferably wood or glass--frosted = black, clear = white
+Get a chessboard, preferably glass--frosted = black, clear = white
 Add LED beneath each square on the board (breadboard beneath, so maybe wood)
 Violin harmonics - 3rd position, so 1 sul G = C4
 Add a photoresistor to trigger LED lights and sounds
@@ -16,6 +16,7 @@ varF = 4 sul A // 8va //
 varG = 1 sul E // 8va high E //
 varH = 4 sul E // 8va //
 
+BASIC MOVEMENT FOR ANY PIECE
 if varA:
     moveForward 1 space
 if varB:
@@ -37,43 +38,8 @@ if varH:
 Should it be time-sensitive?
 example: 2000ms = 2 spaces? //
 
-BUGS/LOGISTICAL ISSUES
-1.  Can't use only natural harmonics. 
-    Creates duplicates. 
-    Error message or no, frequencies will trigger execution of multiple commands and might crash the program. 
-    If it doesn't crash, use these duplicates for complex pieces like the knight, 
-    which moves across horizontal and vertical axes.
 
-2.  Individual methods for each piece.
-    See methods below.
-
-3.  METHODS for capturing pieces
-    creates more problems with duplicate frequencies.
-    too many possible combinations
-    If [specific checkmate pattern]:
-        [trigger specific set of frequencies]
-    elif [other checkmate pattern]:
-        [trigger a musical motif]
-    more elifs for a large but finite number of checkmate patterns:
-        [trigger large but finite no. of leitmotifs]
-
-4.  METHODS for player errors:
-    a. when a player is in check and makes an impossible move
-        [musical equivalent of an error message--BEEP! BEEP!]
-    b. when a player attempts to move a piece after putting it down
-        [another musical error message]
-    c. when a player loses a game - maybe some sound effects, too?
-        could be a rude sound--HAHA, LOSER!
-        could also be something sad, WOMP, WOMP!
-
-5.  Methods for player successes:
-    a. when a player captures their opponent's pieces
-        [maybe a bell sound, player associates bell with success]
-    b. when a player puts their opponent in check
-        [something tense to signal danger for player in check
-        and possible victory for opponent]
-
-METHODS CREATED THIS FAR:
+SPECIFIC METHODS FOR EACH PIECE
   def Pawn
     // method for normal gameplay //
     // method for normal pawn captures //
@@ -139,7 +105,43 @@ METHODS CREATED THIS FAR:
       moveBack 1 space + moveRight 1 space
 
   def Queen
-      // oh, boy //
+      call musical-chess.Bishop or musical-chess.Rook 
+
+BUGS/LOGISTICAL ISSUES, MORE METHODS
+1.  Can't use only natural harmonics. 
+    Creates duplicates. 
+    Error message or no, frequencies will trigger execution of multiple commands and might crash the program. 
+    If it doesn't crash, use these duplicates for complex pieces like the knight, 
+    which moves across horizontal and vertical axes.
+
+2.  Individual methods for each piece.
+    See methods below.
+
+3.  METHODS for capturing pieces
+    creates more problems with duplicate frequencies.
+    too many possible combinations
+    If [specific checkmate pattern]:
+        [trigger specific set of frequencies]
+    elif [other checkmate pattern]:
+        [trigger a musical motif]
+    more elifs for a large but finite number of checkmate patterns:
+        [trigger large but finite no. of leitmotifs]
+
+4.  METHODS for player errors:
+    a. when a player is in check and makes an impossible move
+        [musical equivalent of an error message--BEEP! BEEP!]
+    b. when a player attempts to move a piece after putting it down
+        [another musical error message]
+    c. when a player loses a game - maybe some sound effects, too?
+        could be a rude sound--HAHA, LOSER!
+        could also be something sad, WOMP, WOMP!
+
+5.  Methods for player successes:
+    a. when a player captures their opponent's pieces
+        [maybe a bell sound, player associates bell with success]
+    b. when a player puts their opponent in check
+        [something tense to signal danger for player in check
+        and possible victory for opponent]
 
 THINGS I EXPECT TO INCLUDE IN MY CODE:
 If-Statements.
