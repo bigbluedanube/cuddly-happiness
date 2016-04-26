@@ -1,5 +1,5 @@
 Get a chessboard, preferably glass--frosted = black, clear = white
-Add LED beneath each square on the board (breadboard beneath, so maybe wood)
+Add an LED beneath each square on the board (breadboard beneath, so maybe wood)
 Violin harmonics - 3rd position, so 1 sul G = C4
 Add a photoresistor to trigger LED lights and sounds
 Use OSC (or something else) to connect board to PD, SC or Max patch.
@@ -49,11 +49,17 @@ SPECIFIC METHODS FOR EACH PIECE
         moveTwoSpaces
     def pawnPromotion:
         method for pawntoRook
+            call musical-chess.Rook
+            // piece plays as Rook from here on out//
         method for pawntoKnight
+            call musical-chess.Knight
+            // piece plays as Knight from here on out//
         method for pawntoBishop
+            call musical-chess.Bishop
+            // piece plays as Bishop from here on out//
         method for pawntoQueen:
             call musical-chess.Queen
-            // piece plays as queen from here on out//
+            // piece plays as Queen from here on out//
 
   def Rook
     def minSpaces
@@ -114,10 +120,7 @@ BUGS/LOGISTICAL ISSUES, MORE METHODS
     If it doesn't crash, use these duplicates for complex pieces like the knight, 
     which moves across horizontal and vertical axes.
 
-2.  Individual methods for each piece.
-    See methods below.
-
-3.  METHODS for capturing pieces
+2.  METHODS for capturing pieces
     creates more problems with duplicate frequencies.
     too many possible combinations
     If [specific checkmate pattern]:
@@ -127,7 +130,7 @@ BUGS/LOGISTICAL ISSUES, MORE METHODS
     more elifs for a large but finite number of checkmate patterns:
         [trigger large but finite no. of leitmotifs]
 
-4.  METHODS for player errors:
+3.  METHODS for player errors:
     a. when a player is in check and makes an impossible move
         [musical equivalent of an error message--BEEP! BEEP!]
     b. when a player attempts to move a piece after putting it down
@@ -136,7 +139,7 @@ BUGS/LOGISTICAL ISSUES, MORE METHODS
         could be a rude sound--HAHA, LOSER!
         could also be something sad, WOMP, WOMP!
 
-5.  Methods for player successes:
+4.  Methods for player successes:
     a. when a player captures their opponent's pieces
         [maybe a bell sound, player associates bell with success]
     b. when a player puts their opponent in check
@@ -144,9 +147,6 @@ BUGS/LOGISTICAL ISSUES, MORE METHODS
         and possible victory for opponent]
 
 THINGS I EXPECT TO INCLUDE IN MY CODE:
-If-Statements.
-For-Loops (maybe... not sure how useful they would be)
-Recursion (???)
 Boolean Values for player errors
 touch.py <-- or similar script to determine if player has "released" the piece. 
     self.touch (has the player removed their hand?) == None or not None.
@@ -165,5 +165,5 @@ Mic needs to "hear" minimum amplitude.
         // Cannot move again until opponent has moved//
         // enforces rules for touching and releasing pieces//
     
-#winning method for victorious player, #wompwomp method for losing player
+musical-chess.wahoo for victorious player, musical-chess.wompWomp for losing player
     could trigger sound effects coming from each speaker after all endgame methods have been executed.
