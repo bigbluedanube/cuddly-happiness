@@ -1,10 +1,21 @@
-Get a chessboard, preferably glass--frosted = black, clear = white
-Add an LED beneath each square on the board (breadboard beneath, so maybe wood)
-Violin harmonics - 3rd position, so 1 sul G = C4
-Add a photoresistor to trigger LED lights and sounds
-Use OSC (or something else) to connect board to PD, SC or Max patch.
-Add a fiddle-like object to analyze frequencies, helps execute commands
-Use gameplay code to make LEDs respond to frequencies "heard" by PC/SC/Max.
+HARDWARE NEEDS
+    Get a chessboard, preferably glass--frosted = black, clear = white
+    Add an LED beneath each square on the board (breadboard beneath, so maybe wood)
+    Add a photoresistor to trigger LED lights and sounds
+
+SOFTWARE NEEDS
+    Notation software: violin harmonics - 3rd position, so 1 sul G = C4
+        human performers or chess players or the software itself?
+    OSC (or something else) to connect board to PD, SC or Max patch.
+    Pd, SC, or Max/MSP
+    If PD:
+        a fiddle-like object to analyze frequencies and execute commands
+    elif SC:
+        OSC to connect to literally everything else
+    elif Max/MSP:
+        create fiddle and trigger LED (maybe PD can do this, too?)
+    else:
+        use gameplay code to make LEDs respond to frequencies "heard" by PC/SC/Max/other.
 
 // possible variables for specific frequencies--currently only for violin //
 varA = 1 sul G // high D //
