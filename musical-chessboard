@@ -1,11 +1,14 @@
 HARDWARE NEEDS
     Get a chessboard, preferably glass--frosted = black, clear = white
-    Add an LED beneath each square on the board (breadboard beneath, so maybe wood)
-    Add a photoresistor to trigger LED lights and sounds
+    Add an LED beneath each square on the board (there will be a breadboard beneath, so maybe wood?)
+    Add a photoresistor to trigger LED lights and sounds (uncovered/covered square = on/off)
 
 SOFTWARE NEEDS
     Notation software: violin harmonics - 3rd position, so 1 sul G = C4
         human performers or chess players or the software itself?
+        ideally something that can notate/playback natural harmonics
+        may have to use a more accessible insturment, 
+        or just format for chess players instead of musicians
     OSC (or something else) to connect board to PD, SC or Max patch.
     Pd, SC, or Max/MSP
     If PD:
@@ -16,6 +19,7 @@ SOFTWARE NEEDS
         create fiddle and trigger LED (maybe PD can do this, too?)
     else:
         use gameplay code to make LEDs respond to frequencies "heard" by PC/SC/Max/other.
+BUT - the noise floor is a problem--> highly sensitive mics? Piezos?
 
 // possible variables for specific frequencies--currently only for violin //
 varA = 1 sul G // high D //
@@ -125,14 +129,13 @@ SPECIFIC METHODS FOR EACH PIECE
       call musical-chess.Bishop or musical-chess.Rook 
 
 BUGS/LOGISTICAL ISSUES, MORE METHODS
-1.  Can't use only natural harmonics. 
-    Creates duplicates. 
+1.  Can't use only natural harmonics. Creates duplicates. 
     Error message or no, frequencies will trigger execution of multiple commands and might crash the program. 
     If it doesn't crash, use these duplicates for complex pieces like the knight, 
     which moves across horizontal and vertical axes.
 
 2.  METHODS for capturing pieces
-    creates more problems with duplicate frequencies.
+    create more problems with duplicate frequencies.
     too many possible combinations
     If [specific checkmate pattern]:
         [trigger specific set of frequencies]
@@ -140,6 +143,7 @@ BUGS/LOGISTICAL ISSUES, MORE METHODS
         [trigger a musical motif]
     more elifs for a large but finite number of checkmate patterns:
         [trigger large but finite no. of leitmotifs]
+        [add new checkmate matterns with each new version]
 
 3.  METHODS for player errors:
     a. when a player is in check and makes an impossible move
@@ -155,7 +159,7 @@ BUGS/LOGISTICAL ISSUES, MORE METHODS
         [maybe a bell sound, player associates bell with success]
     b. when a player puts their opponent in check
         [something tense to signal danger for player in check
-        and possible victory for opponent]
+        and imminent victory for opponent]
 
 THINGS I EXPECT TO INCLUDE IN MY CODE:
 Boolean Values for player errors
@@ -171,6 +175,9 @@ touch.py <-- or similar script to determine if player has "released" the piece.
 Mic needs to "hear" minimum amplitude.
     def minAmp
         // Bypasses the problem of the noise floor to facilitate gameplay//
+Mic needs to "hear" maximum amplitude to prevent use of clipping as an input
+    def maxAmp
+        // Eliminates distorted sounds and loud or close noises from set of possible inputs//
     
     def Release    
         // Cannot move again until opponent has moved//
